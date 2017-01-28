@@ -42,6 +42,7 @@ public class Main {
         printOptions();
         boolean go = true;
         while(go) {
+            System.out.print("Command: ");
             int choice = verifyNumericInput(scanner, 1, 10, true);  // GET USER CHOICE
 
             switch (choice) {
