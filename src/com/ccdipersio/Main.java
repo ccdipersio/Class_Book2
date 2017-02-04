@@ -2,6 +2,7 @@ package com.ccdipersio;
 
 import java.io.*;
 import java.util.Scanner;
+import java.util.regex.*;
 
 public class Main {
 
@@ -154,7 +155,6 @@ public class Main {
         }
     }
 
-    // CHECK FILE INTEGRITY
     private static boolean checkFileIntegrity(String filePath) {
         System.out.println("\nChecking file integrity at path " + filePath + "...");
         File toCheck = new File(filePath);  // CREATE FILE OBJECT WITH PATH

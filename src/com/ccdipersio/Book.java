@@ -74,20 +74,25 @@ public class Book {
             }
 
         // PRINT FIRST LINE (DATES)
+
         System.out.print("| ");  // PRINT NAME SLOT (EMPTY IN FIRST (DATE) LINE
         for (int i = 0; i < longestName; i++)
             System.out.print(" ");
         System.out.print(" |");
-        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++)  // PRINT SLOTS WITH DATES
-            System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment() + " |");
+        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {  // PRINT SLOTS WITH DATES
+            int dateLen = this.gradeList.get(0).getGrades().get(i).getDateOfAssignment().length();
+            System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment());
+            for (int j = 0; j < 9 - dateLen; j++)
+                System.out.print(" ");
+            System.out.print("|");
+        }
         System.out.println();
 
         // PRINT SUBSEQUENT LINES
-        int studentNameLen = 0;  // VARIABLE FOR LENGTH OF I'TH STUDENT'S NAME
 
         // PRINT STUDENT'S NAME
         for (int i = 1; i < this.gradeList.size(); i++) {  // ITERATE THROUGH GRADE LIST
-            studentNameLen = this.classList.get(i).getName().length();  // GET LENGTH OF I'TH STUDENT'S NAME
+            int studentNameLen = this.classList.get(i).getName().length();  // GET LENGTH OF I'TH STUDENT'S NAME
             if (studentNameLen != longestName) {  // CHECK IF I'TH STUDENT'S NAME ISN'T THE LONGEST
                 System.out.print("| ");  // PRINT LEFT-MOST BAR
                 for (int j = 0; j < ((longestName - studentNameLen) / 2); j++)  // PRINT SPACES
@@ -120,34 +125,15 @@ public class Book {
     }
     // INTERNAL FUNCTION COMPONENT FOR PRINTING ASSIGNMENT DETAILS
     private void functionComponent_printAssignmentsAndGrades(int studentNumber) {
-        int dateLength = 0;
+        int dateLength = 10;
         for (int j = 0; j < this.gradeList.get(studentNumber).getGrades().size(); j++) {  // ITERATE THROUGH I'TH STUDENT'S GRADES
-            dateLength = this.gradeList.get(studentNumber).getGrades().get(j).getDateOfAssignment().length();  // GET LENGTH OF J'TH ASSIGNMENT'S STRING
-            System.out.print(" ");  // PRINT SPACE
-            if (this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() > -1 && this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() < 10) {  // IF SCORE IS BETWEEN 0 AND 9
-                for (int k = 0; k < ((dateLength - 1) / 2); k++)  // PRINT SPACES               }
-                    System.out.print(" ");
-                System.out.print(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore());  // PRINT SCORE
-                for (int k = 0; k < ((dateLength - 1) / 2) + 1; k++)  // PRINT SPACES
-                    System.out.print(" ");
-            } else if(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() > 9 && this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() < 100) {  // IF SCORE IS BETWEEN 10 AND 99
-                for (int k = 0; k < ((dateLength - 2) / 2); k++)  // PRINT SPACES
-                    System.out.print(" ");
-                System.out.print(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore());  // PRINT SCORE
-                for (int k = 0; k < ((dateLength - 2) / 2) + 1; k++)  // PRINT SPACES
-                    System.out.print(" ");
-            } else if (this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() > 99 && this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore() < 1000) {  // IF SCORE IS BETWEEN 100 AND 999
-                for (int k = 0; k < ((dateLength - 3) / 2); k++)  // PRINT SPACES
-                    System.out.print(" ");
-                System.out.print(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore());  // PRINT SCORE
-                for (int k = 0; k < ((dateLength - 2) / 2) + 1; k++)  // PRINT SPACES
-                    System.out.print(" ");
-            }
-            if(String.valueOf(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore()).length() % 2 == 0)  // PRINT SPACE AND BAR IF NAME HAS EVEN LENGTH
-                System.out.print(" |");
-            else  // ELSE JUST PRINT BAR
-                System.out.print("|");
+            int scoreLen = String.valueOf(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore()).length() + 1;
+            System.out.print(" " + this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore());
+            for (int i = 0; i < dateLength - scoreLen; i++)
+                System.out.print(" ");
+            System.out.print("|");
         }
+
         System.out.println();  // PRINT NEW LINE
     }
     // PRINT SINGLE STUDENT'S ASSIGNMENTS AND GRADES
@@ -157,11 +143,17 @@ public class Book {
         for (int i = 0; i < this.classList.get(studentNumber).getName().length(); i++)  // PRINT SPACES
             System.out.print(" ");
         System.out.print(" |");
-        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++)  // PRINT DATES
-            System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment() + " |");
-        System.out.println("");
 
-        System.out.printf("| " + this.classList.get(studentNumber).getName() + " |"); // PRINT NAME
+        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {  // PRINT SLOTS WITH DATES
+            int dateLen = this.gradeList.get(0).getGrades().get(i).getDateOfAssignment().length();
+            System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment());
+            for (int j = 0; j < 9 - dateLen; j++)
+                System.out.print(" ");
+            System.out.print("|");
+        }
+        System.out.println();
+
+        System.out.print("| " + this.classList.get(studentNumber).getName() + " |"); // PRINT NAME
         // PRINT ASSIGNMENTS' GRADES
         functionComponent_printAssignmentsAndGrades(studentNumber);
 
