@@ -2,16 +2,26 @@ package com.ccdipersio;
 
 import java.util.ArrayList;
 
-class Grades {
-    private int studentNumber;  // NUMBER TO REFERENCE STUDENT CORRESPONDING TO GRADE LIST
-    private ArrayList<Assignment> grades = new ArrayList<>();  // ARRAY LIST FOR GRADES
+/**
+ * This is the Grades class.
+ * This doesn't have any functions that actually do anything besides constructing and getting.
+ */
 
-    // CONSTRUCTOR
+class Grades {
+    private int studentNumber;
+    private ArrayList<Assignment> grades = new ArrayList<>();
+
+    /**
+     * Constructor.
+     * @param studentNumber int Number of the Student.
+     */
     Grades(int studentNumber) {
         this.studentNumber = studentNumber;
     }
 
-    // GETTERS
+    /**
+     * Getter.
+     */
     ArrayList<Assignment> getGrades() {
         return grades;
     }

@@ -2,22 +2,28 @@ package com.ccdipersio;
 
 import java.util.ArrayList;
 
+/**
+ * This is the Book class which stores the lists of Students and their Grades.
+ * It includes implementation to search the lists and print contents of the lists.
+ * Printing can be the entire lists or just a single entry.
+ */
+
 public class Book {
-    private String bookName;  // NAME OF BOOK
-    private ArrayList<Student> classList = new ArrayList<>();  // LIST OF STUDENTS EXCLUSIVELY
-    private ArrayList<Grades> gradeList = new ArrayList<>();  // LIST OF GRADES EXCLUSIVELY
+    private String bookName;
+    private ArrayList<Student> classList = new ArrayList<>();
+    private ArrayList<Grades> gradeList = new ArrayList<>();
 
-
-    // CONSTRUCTOR
+    /**
+     * Constructor.
+     * @param bookName  String  Name of the book.
+     */
     Book(String bookName) {
         this.bookName = bookName;
     }
 
-
-    // GETTERS
-    String getBookName() {
-        return bookName;
-    }
+    /**
+     * Getters.
+     */
     ArrayList<Student> getClassList() {
         return classList;
     }
@@ -25,21 +31,11 @@ public class Book {
         return gradeList;
     }
 
-
-    // SETTERS
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-    public void setClassList(ArrayList<Student> classList) {
-        this.classList = classList;
-    }
-    public void setGradeList(ArrayList<Grades> gradeList) {
-        this.gradeList = gradeList;
-    }
-
-
-    // SEARCHING FUNCTIONS
-    // SEARCH FOR STUDENT BY NAME STRING
+    /**
+     * Searches for a Student based on Name.
+     * @param studentName   The Name of the Student to be searched.
+     * @return  int Index of the Student in the classList; -1 if the Student isn't in the classList.
+     */
     int searchForStudent(String studentName) {
         for (int i = 0; i < this.classList.size(); i++) {
             if (this.classList.get(i).getName().equals(studentName))
@@ -47,7 +43,12 @@ public class Book {
         }
         return -1;
     }
-    // SEARCH FOR ASSIGNMENT BY NAME STRING
+
+    /**
+     * Searches for an Assignment based on Name.
+     * @param assignmentName    The Name of the Assignment to be searched.
+     * @return  int Index of the Assignment in the gradeList; -1 if the Assignment isn't in the gradeList.
+     */
     int searchForAssignmentName(String assignmentName) {
         for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {
             if (this.gradeList.get(0).getGrades().get(i).getName().equals(assignmentName))
@@ -55,7 +56,12 @@ public class Book {
         }
         return -1;
     }
-    // SEARCH FOR ASSIGNMENT BY DATE STRING
+
+    /**
+     * Searches for an Assignment based on Date.
+     * @param assignmentDate    The Date of the Assignment to be searched.
+     * @return  int Index of the Assignment in the gradeList; -1 if the Assignment isn't in the gradeList.
+     */
     int searchForAssignmentDate(String assignmentDate) {
         for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {
             if (this.gradeList.get(0).getGrades().get(i).getDateOfAssignment().equals(assignmentDate))
@@ -64,22 +70,22 @@ public class Book {
         return -1;
     }
 
-    // OTHER FUNCTIONS
-    // PRINT ENTIRE BOOK
+
+    /**
+     * Prints all contents of the Book.
+     */
     void printBook() {
-        int longestName = 0;  // VARIABLE TO STORE LENGTH OF LONGEST NAME FOR FORMATTING OUTPUT
-            for (int i = 1; i < this.classList.size(); i++) {  // ITERATE THROUGH CLASS LIST
-                if (longestName < this.classList.get(i).getName().length())  // CHECK CURRENT LENGTH AGAINST I'TH STUDENT'S NAME'S LENGTH
-                    longestName = this.classList.get(i).getName().length();  // IF SHORTER, REASSIGN TO I'TH STUDENT'S NAME'S LENGTH
+        int longestName = 0;
+            for (int i = 1; i < this.classList.size(); i++) {
+                if (longestName < this.classList.get(i).getName().length())
+                    longestName = this.classList.get(i).getName().length();
             }
 
-        // PRINT FIRST LINE (DATES)
-
-        System.out.print("| ");  // PRINT NAME SLOT (EMPTY IN FIRST (DATE) LINE
+        System.out.print("| ");
         for (int i = 0; i < longestName; i++)
             System.out.print(" ");
         System.out.print(" |");
-        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {  // PRINT SLOTS WITH DATES
+        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {
             int dateLen = this.gradeList.get(0).getGrades().get(i).getDateOfAssignment().length();
             System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment());
             for (int j = 0; j < 9 - dateLen; j++)
@@ -88,29 +94,24 @@ public class Book {
         }
         System.out.println();
 
-        // PRINT SUBSEQUENT LINES
-
-        // PRINT STUDENT'S NAME
-        for (int i = 1; i < this.gradeList.size(); i++) {  // ITERATE THROUGH GRADE LIST
-            int studentNameLen = this.classList.get(i).getName().length();  // GET LENGTH OF I'TH STUDENT'S NAME
-            if (studentNameLen != longestName) {  // CHECK IF I'TH STUDENT'S NAME ISN'T THE LONGEST
-                System.out.print("| ");  // PRINT LEFT-MOST BAR
-                for (int j = 0; j < ((longestName - studentNameLen) / 2); j++)  // PRINT SPACES
+        for (int i = 1; i < this.gradeList.size(); i++) {
+            int studentNameLen = this.classList.get(i).getName().length();
+            if (studentNameLen != longestName) {
+                System.out.print("| ");
+                System.out.print(this.classList.get(i).getName());
+                for(int j = 0; j < longestName - studentNameLen; j++)
                     System.out.print(" ");
-                System.out.print(this.classList.get(i).getName());  // PRINT I'TH STUDENT'S NAME
-                for (int j = 0; j < ((longestName - studentNameLen) / 2) + 1; j++)  // PRINT SPACES
-                    System.out.print(" ");
-                if (longestName % 2 == 0)  // PRINT SPACE AND BAR IF NAME HAS EVEN LENGTH
-                    System.out.print(" |");
-                else  // ELSE JUST PRINT BAR
-                    System.out.print("|");
-            } else  // IF LONGEST NAME, JUST PRINT NAME
+                System.out.print(" |");
+            } else
                 System.out.print("| " + this.classList.get(i).getName() + " |");
-            // PRINT STUDENT'S ASSIGNMENTS' GRADES
             functionComponent_printAssignmentsAndGrades(i);
         }
     }
-    // PRINT SINGLE STUDENT'S DETAILS
+
+    /**
+     * Prints a single Students details.
+     * @param studentNumber Number of the Student whose details will be printed.
+     */
     void printSingleStudentDetails(int studentNumber) {
         System.out.println("-------------------------------------------------------");
         System.out.println("Name: " + this.classList.get(studentNumber).getName());
@@ -118,15 +119,23 @@ public class Book {
         System.out.println("Grade Level " + this.classList.get(studentNumber).getGradeLevel());
         System.out.println("-------------------------------------------------------");
     }
-    // PRINT ENTIRE CLASS'S DETAILS
+
+    /**
+     * Prints details of the entire class using the printSingleStudentDetails function.
+     */
     void printClassDetails() {
         for (int i = 1; i < this.classList.size(); i++)
             this.printSingleStudentDetails(i);
     }
-    // INTERNAL FUNCTION COMPONENT FOR PRINTING ASSIGNMENT DETAILS
+
+    /**
+     * Prints a Student's Assignments and Grades with proper formatting.
+     * This function is used in other functions to get proper formatting within those functions.
+     * @param studentNumber int Number of Student whose Assignments and Grades will be printed.
+     */
     private void functionComponent_printAssignmentsAndGrades(int studentNumber) {
         int dateLength = 10;
-        for (int j = 0; j < this.gradeList.get(studentNumber).getGrades().size(); j++) {  // ITERATE THROUGH I'TH STUDENT'S GRADES
+        for (int j = 0; j < this.gradeList.get(studentNumber).getGrades().size(); j++) {
             int scoreLen = String.valueOf(this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore()).length() + 1;
             System.out.print(" " + this.gradeList.get(studentNumber).getGrades().get(j).getAchievedScore());
             for (int i = 0; i < dateLength - scoreLen; i++)
@@ -134,17 +143,20 @@ public class Book {
             System.out.print("|");
         }
 
-        System.out.println();  // PRINT NEW LINE
+        System.out.println();
     }
-    // PRINT SINGLE STUDENT'S ASSIGNMENTS AND GRADES
+
+    /**
+     * Prints a single Student's Assignments and Grades.
+     * @param studentNumber int Number of Student whose Assignments and Grade will be printed.
+     */
     void printSingleStudentAssignmentsAndGrades(int studentNumber) {
-        // PRINT FIRST LINE (DATES)
-        System.out.print("| ");  // PRINT NAME SLOT (EMPTY IN FIRST LINE)
-        for (int i = 0; i < this.classList.get(studentNumber).getName().length(); i++)  // PRINT SPACES
+        System.out.print("| ");
+        for (int i = 0; i < this.classList.get(studentNumber).getName().length(); i++)
             System.out.print(" ");
         System.out.print(" |");
 
-        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {  // PRINT SLOTS WITH DATES
+        for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {
             int dateLen = this.gradeList.get(0).getGrades().get(i).getDateOfAssignment().length();
             System.out.print(" " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment());
             for (int j = 0; j < 9 - dateLen; j++)
@@ -153,23 +165,24 @@ public class Book {
         }
         System.out.println();
 
-        System.out.print("| " + this.classList.get(studentNumber).getName() + " |"); // PRINT NAME
-        // PRINT ASSIGNMENTS' GRADES
+        System.out.print("| " + this.classList.get(studentNumber).getName() + " |");
         functionComponent_printAssignmentsAndGrades(studentNumber);
 
     }
-    // PRINT ALL ASSIGNMENT DETAILS
+
+    /**
+     * Prints all Assignments' Details
+     */
     void printAssignmentDetails() {
         for (int i = 0; i < this.gradeList.get(0).getGrades().size(); i++) {
-            System.out.println("-------------------------------------------------------");
-            System.out.println("Assignment Name: " + this.gradeList.get(0).getGrades().get(i).getName());
-            System.out.println("Assignment Type: " + this.gradeList.get(0).getGrades().get(i).getTypeToStringConverted());
-            System.out.println("Date of Assignment: " + this.gradeList.get(0).getGrades().get(i).getDateOfAssignment());
-            System.out.println("Maximum Score: " + this.gradeList.get(0).getGrades().get(i).getMaxScore());
-            System.out.println("-------------------------------------------------------");
+            this.printSingleAssignmentDetails(i);
         }
     }
-    // PRINT SINGLE ASSIGNMENT'S DETAILS
+
+    /**
+     * Prints a single Assignment's Details
+     * @param assignmentIndex   int Index of Assignment in the gradeList to be printed
+     */
     void printSingleAssignmentDetails(int assignmentIndex) {
         System.out.println("-------------------------------------------------------");
         System.out.println("Assignment Name: " + this.gradeList.get(0).getGrades().get(assignmentIndex).getName());

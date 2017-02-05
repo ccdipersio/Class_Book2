@@ -1,7 +1,8 @@
 package com.ccdipersio;
 
 /**
- * Assignment Type Integer Definitions
+ * This is the Assignment class.
+ * Knowing what the Assignment Type indexes are is vital to correct usages. Those indexes are:
  * 0 - Final Exam
  * 1 - Midterm Exam
  * 2 - Test
@@ -14,15 +15,22 @@ package com.ccdipersio;
  * 9 - Participation
  */
 class Assignment {
-    private String name;  // ASSIGNMENT'S NAME
-    private int type;  // TYPE INTEGER (definitions above)
-    private String typeToStringConverted;  // TYPE'S ASSOCIATED STRING VALUE (definitions above)
-    private String dateOfAssignment;  // DATE OF ASSIGNMENT
-    private int achievedScore;  // SCORE ACHIEVED BY THE STUDENT
-    private int maxScore;  // MAXIMUM POSSIBLE SCORE ON ASSIGNMENT
+    private String name;
+    private int type;
+    private String typeToStringConverted;
+    private String dateOfAssignment;
+    private int achievedScore;
+    private int maxScore;
 
 
-    // CONSTRUCTOR
+    /**
+     * Constructor.
+     * @param name  String  Name of the Assignment.
+     * @param type  int Integer referring to the type of Assignment.
+     * @param dateOfAssignment  String  Date of the Assignment.
+     * @param achievedScore int Student's Score on the Assignment.
+     * @param maxScore  int Maximum possible Score on the Assignment.
+     */
     Assignment(String name, int type, String dateOfAssignment, int achievedScore, int maxScore) {
         this.name = name;
         this.type = type;
@@ -32,8 +40,9 @@ class Assignment {
         this.maxScore = maxScore;
     }
 
-
-    // GETTERS
+    /**
+     * Getters.
+     */
     String getName() {
         return name;
     }
@@ -53,8 +62,10 @@ class Assignment {
         return maxScore;
     }
 
-    // OTHER FUNCTIONS
-    // CONVERT TYPE INTEGER TO ASSOCIATED STRING
+    /**
+     * Defines the Name of the Type of Assignment based on the Type Integer.
+     * @return  String  Name of the Type of the Assignment; else if a bad Integer is passed, "ERROR" is returned.
+     */
     private String typeToStringConvert() {
         switch(this.type) {
             case 0:

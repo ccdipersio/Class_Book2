@@ -1,18 +1,30 @@
 package com.ccdipersio;
 
-class Student {
-    private String name;  // STUDENT'S NAME
-    private int studentNumber;  // STUDENT'S CLASS NUMBER
-    private int gradeLevel;  // STUDENT'S GRADE LEVEL
+/**
+ * This is the Student class.
+ * This doesn't have any functions that actually do anything besides constructing and getting.
+ */
 
-    // CONSTRUCTOR
+class Student {
+    private String name;
+    private int studentNumber;
+    private int gradeLevel;
+
+    /**
+     * Constructor.
+     * @param name  String  Name of Student.
+     * @param studentNumber int Number of Student
+     * @param gradeLevel    int gradeLevel of Student
+     */
     Student(String name, int studentNumber, int gradeLevel) {
         this.name = name;
         this.studentNumber = studentNumber;
         this.gradeLevel = gradeLevel;
     }
 
-    // GETTERS
+    /**
+     * Getters.
+     */
     String getName() {
         return name;
     }
